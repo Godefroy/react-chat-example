@@ -1,0 +1,24 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+tmp
+
+# IDE
+.idea
+
+# Dependency directories
+node_modules
+
+# Optional REPL history
+.node_repl_history
+
+# custom env file
+.env
+ecosystem.json
+
+# Webpack and build
+webpack-assets.json
+webpack-stats.json
+build
+
