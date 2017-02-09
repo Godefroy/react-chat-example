@@ -6,6 +6,6 @@ const initialState = Immutable.List()
 
 export default createReducer(initialState, {
     [actions.ADD_MESSAGE]: (state, {message}) => {
-        return state.push(message)
+        return state.push(Immutable.fromJS(message))
     }
 })

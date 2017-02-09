@@ -1,5 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import Paper from 'material-ui/Paper'
+import TextField from 'material-ui/TextField'
 // Actions
 import {changeNickname} from '../actions/users'
 import {updateForm, sendMessage} from '../actions/messageForm'
@@ -15,11 +17,15 @@ class MessageForm extends React.Component {
 
     render() {
         const {style, notifiers} = this.props
-        return <form style={ style } onSubmit={this.submit.bind(this)}>
-            <input type="text"
-                   value={notifiers.text}
-                   onChange={this.changeText.bind(this)}/>
-            <button>Envoyer</button>
+        return <form onSubmit={ this.submit.bind(this) }>
+            <Paper style={{padding: '0 15px'}}>
+                <TextField
+                    hintText='Message...'
+                    fullWidth
+                    value={ notifiers.text }
+                    onChange={ this.changeText.bind(this) }
+                />
+            </Paper>
         </form>
     }
 
@@ -47,7 +53,6 @@ class MessageForm extends React.Component {
 }
 
 MessageForm.propTypes = {
-    style: React.PropTypes.object,
     actions: React.PropTypes.object,
     notifiers: React.PropTypes.object
 }
