@@ -1,10 +1,18 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 // Actions
 import {changeNickname} from '../actions/users'
 import {updateForm, sendMessage} from '../actions/messageForm'
 
 class MessageForm extends React.Component {
+    componentWillMount() {
+        // Auto-nick
+        const nickname = localStorage.getItem('nickname')
+        if (nickname) {
+            this.props.actions.changeNickname(nickname)
+        }
+    }
+
     render() {
         const {style, notifiers} = this.props
         return <form style={ style } onSubmit={this.submit.bind(this)}>

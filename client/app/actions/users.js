@@ -27,6 +27,9 @@ export function changeNickname(nickname) {
                 alert(data.error)
                 return
             }
+            // Save in LocalStorage
+            localStorage.setItem('nickname', nickname)
+
             dispatch({
                 type: actions.CHANGE_NICKNAME
             })
