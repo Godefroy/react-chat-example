@@ -2,6 +2,9 @@ const server = require('http').createServer();
 const io = require('socket.io')(server);
 const uuid = require('node-uuid')
 
+const emptyReply = () => {
+}
+
 const users = []
 
 io.on('connection', (socket) => {
@@ -19,6 +22,7 @@ io.on('connection', (socket) => {
 
     // Change Nickname
     socket.on('nick', (nickname, reply) => {
+        reply = reply || emptyReply
         if (typeof (nickname) !== 'string') {
             reply({
                 error: "Nickname missing"
@@ -26,9 +30,11 @@ io.on('connection', (socket) => {
             return
         }
         user.nickname = nickname.substr(0, 30)
+        reply()
     })
 
     socket.on('msg', (message, reply) => {
+        reply = reply || emptyReply
         if (typeof (message) !== 'string') {
             reply({
                 error: "Message missing"
