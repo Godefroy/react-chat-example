@@ -1,8 +1,7 @@
 import React from 'react'
-import Form from './Form'
-import Messages from './Messages'
-import SideBar from './SideBar'
-import socket from './socket'
+import MessageForm from './components/MessageForm'
+import Messages from './components/Messages'
+import SideBar from './components/SideBar'
 
 const styles = {
     container: {
@@ -45,7 +44,7 @@ export default class App extends React.Component {
         return <div style={ styles.container }>
             <SideBar style={ styles.sidebar }/>
             <Messages style={ styles.messages }/>
-            <Form style={ styles.form }/>
+            <MessageForm style={ styles.form }/>
         </div>
     }
 }
