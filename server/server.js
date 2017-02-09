@@ -35,7 +35,8 @@ io.on('connection', (socket) => {
             })
             return
         }
-        broadcast({
+        broadcast('msg', {
+            id: uuid.v4(),
             userId,
             message,
             date: new Date().getTime()
@@ -43,7 +44,7 @@ io.on('connection', (socket) => {
     })
 
     // Broadcast new Users List
-    broadcast(users.map((user) => {
+    broadcast('userslist', users.map((user) => {
         return {
             id: user.id,
             nickname: user.nickname
@@ -52,9 +53,9 @@ io.on('connection', (socket) => {
 })
 
 
-const broadcast = (data) => {
+const broadcast = (eventName, data) => {
     users.forEach((user) => {
-        user.socket.emit(data)
+        user.socket.emit(eventName, data)
     })
 }
 
