@@ -40,7 +40,7 @@ class UsersList extends React.Component {
 
     render() {
         const users = this.state.users.sort((a, b) => {
-            return a.nickname.toLowerCase() < b.nickname.toLowerCase()
+            return a.nickname.toLowerCase() > b.nickname.toLowerCase() ? 1 : -1
         })
         return <ul { ...this.props }>
             { users.map((user) => <li key={ user.id }>{ user.nickname }</li>) }
