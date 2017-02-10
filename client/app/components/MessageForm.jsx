@@ -3,17 +3,17 @@ import {connect} from 'react-redux'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 // Actions
-import {changeNickname} from '../actions/users'
-import {updateForm, sendMessage} from '../actions/messageForm'
+import {sendMessage} from '../actions/messages'
+import {updateForm} from '../actions/ui'
 
 class MessageForm extends React.Component {
-    componentWillMount() {
+    /*componentWillMount() {
         // Auto-nick
         const nickname = localStorage.getItem('nickname')
         if (nickname) {
             this.props.actions.changeNickname(nickname)
         }
-    }
+    }*/
 
     render() {
         const {style, notifiers} = this.props
@@ -37,15 +37,8 @@ class MessageForm extends React.Component {
         e.preventDefault()
         const {actions, notifiers} = this.props
 
-        // Change nickname
-        const nickMatch = notifiers.text.match(/\/nick ([a-z0-9_-]{3,20})/i)
-        if (nickMatch) {
-            actions.changeNickname(nickMatch[1])
-        }
         // Send Message to server
-        else {
-            actions.sendMessage(notifiers.text)
-        }
+        actions.sendMessage(notifiers.currentChannel, notifiers.text)
 
         // Reset input value
         actions.updateForm('')
@@ -59,15 +52,15 @@ MessageForm.propTypes = {
 
 const mapStateToProps = (state) => ({
     notifiers: {
-        text: state.messageFormReducer.get('text')
+        currentChannel: state.uiReducer.get('currentChannel'),
+        text: state.uiReducer.get('text')
     }
 })
 
 const mapDispatchToProps = (dispatch) => ({
     actions: {
         updateForm: (text) => dispatch(updateForm(text)),
-        sendMessage: (text) => dispatch(sendMessage(text)),
-        changeNickname: (nickname) => dispatch(changeNickname(nickname)),
+        sendMessage: (channel, text) => dispatch(sendMessage(channel, text))
     }
 })
 

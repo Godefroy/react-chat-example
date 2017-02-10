@@ -2,15 +2,17 @@ import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunk from 'redux-thunk';
 
 // Reducers
-import usersReducer from './reducers/users'
+import channelsReducer from './reducers/channels'
 import messagesReducer from './reducers/messages'
-import messageFormReducer from './reducers/messageForm'
+import uiReducer from './reducers/ui'
+import userReducer from './reducers/user'
 
 // Combine Reducers
 var reducers = combineReducers({
-    usersReducer,
+    channelsReducer,
     messagesReducer,
-    messageFormReducer
+    uiReducer,
+    userReducer
 })
 
 export default createStore(

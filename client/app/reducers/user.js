@@ -1,13 +1,14 @@
 import Immutable from 'immutable'
 import {createReducer} from 'redux-immutablejs'
-import {actions} from '../actions/messageForm'
+import {actions} from '../actions/user'
 
 const initialState = Immutable.fromJS({
-    text: ''
+    id: null,
+    nickname: 'Anonymous'
 })
 
 export default createReducer(initialState, {
-    [actions.UPDATE_MESSAGE_FORM]: (state, {text}) => {
-        return state.merge({text})
+    [actions.CHANGE_NICKNAME]: (state, {user}) => {
+        return Immutable.fromJS(user)
     }
 })

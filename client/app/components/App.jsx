@@ -3,7 +3,7 @@ import {Grid, Row, Col} from 'react-bootstrap'
 import MessageForm from './MessageForm'
 import Messages from './Messages'
 import SideBar from './SideBar'
-import AppBar from 'material-ui/AppBar'
+import Menu from './Menu'
 
 const styles = {
     container: {
@@ -18,7 +18,7 @@ const styles = {
 export default class App extends React.Component {
     render() {
         return <div style={ styles.container }>
-            <AppBar title='Chat'/>
+            <Menu />
             <Grid fluid>
                 <Row>
                     <Col xs={4} md={3}>

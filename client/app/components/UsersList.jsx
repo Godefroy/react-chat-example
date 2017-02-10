@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import Immutable from 'immutable'
 import Subheader from 'material-ui/Subheader'
 import {List, ListItem} from 'material-ui/List'
 import UserIcon from 'material-ui/svg-icons/social/person'
@@ -7,9 +8,9 @@ import UserIcon from 'material-ui/svg-icons/social/person'
 class UsersList extends React.Component {
     render() {
         // Sort users by nickname
-        const users = this.props.notifiers.users.sort((a, b) => {
-            return a.get('nickname').toLowerCase() > b.get('nickname').toLowerCase() ? 1 : -1
-        })
+        const users = this.props.notifiers.users.sort((a, b) =>
+            a.get('nickname').toLowerCase() > b.get('nickname').toLowerCase() ? 1 : -1
+        )
 
         // Show users list
         return <List>
@@ -30,7 +31,8 @@ UsersList.propTypes = {
 
 const mapStateToProps = (state) => ({
     notifiers: {
-        users: state.usersReducer
+        // Take users of current channel
+        users: state.channelsReducer.get(state.uiReducer.get('currentChannel')) || Immutable.List()
     }
 })
 

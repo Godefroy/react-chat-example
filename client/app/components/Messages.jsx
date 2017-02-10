@@ -43,8 +43,8 @@ class Messages extends React.Component {
                     const lastMsg = list.get(lastI)
                     if (lastMsg.get('userId') === msg.get('userId') &&
                         msg.get('date') - lastMsg.get('date') < groupMaxTimelapse * 1000) {
-                        const message = lastMsg.get('message') + "\n" + msg.get('message')
-                        return list.update(lastI, (item) => item.set('message', message))
+                        const text = lastMsg.get('text') + "\n" + msg.get('text')
+                        return list.update(lastI, (item) => item.set('text', text))
                     }
                 }
                 return list.push(msg)
@@ -52,7 +52,7 @@ class Messages extends React.Component {
 
         return <div>
             <Paper>
-                <Subheader>#general</Subheader>
+                <Subheader>#{ this.props.notifiers.currentChannel }</Subheader>
             </Paper>
             <div style={ styles.container } ref={(ref) => this.container = ref}>
                 <List>
@@ -67,10 +67,14 @@ Messages.propTypes = {
     notifiers: React.PropTypes.object
 }
 
-const mapStateToProps = (state) => ({
-    notifiers: {
-        messages: state.messagesReducer
+const mapStateToProps = (state) => {
+    const currentChannel = state.uiReducer.get('currentChannel')
+    return {
+        notifiers: {
+            currentChannel,
+            messages: state.messagesReducer.filter((message) => message.get('channel') === currentChannel)
+        }
     }
-})
+}
 
 export default connect(mapStateToProps)(Messages)

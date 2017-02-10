@@ -6,12 +6,12 @@ import {connect} from 'react-redux'
 class Message extends React.Component {
     render() {
         const {msg, notifiers} = this.props
-        const user = notifiers.users.find(u => u.get('id') == msg.get('userId'))
+        const user = notifiers.users.find(u => u.get('id') === msg.get('userId'))
         const nickname = user ? user.get('nickname') : '(Unknown)'
 
         return <ListItem disabled leftIcon={ <UserIcon />} style={{ lineHeight: '1.5em'}}>
             <strong>{ nickname }</strong>
-            <p style={{whiteSpace: 'pre-line'}}>{ msg.get('message') }</p>
+            <p style={{whiteSpace: 'pre-line'}}>{ msg.get('text') }</p>
         </ListItem>
     }
 }
@@ -23,7 +23,7 @@ Message.propTypes = {
 
 const mapStateToProps = (state) => ({
     notifiers: {
-        users: state.usersReducer
+        users: state.channelsReducer.toList().flatten(1)
     }
 })
 
