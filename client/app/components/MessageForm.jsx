@@ -25,6 +25,7 @@ class MessageForm extends React.Component {
     submit(e) {
         e.preventDefault()
         const {actions, notifiers} = this.props
+        if (notifiers.inputMessage.replace(/\s+/, '') === '') return
 
         // Send Message to server
         actions.sendMessage(notifiers.currentChannel, notifiers.inputMessage)
