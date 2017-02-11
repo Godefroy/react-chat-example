@@ -25,6 +25,17 @@ io.on('connection', (socket) => {
 
     // User disconnection
     socket.on('disconnect', () => {
+        // Send "quit" event to all channels subscribed by this user
+        if (user.nickname !== null) {
+            Object.keys(channels)
+                .filter((channel) => channels[channel].includes(user.id))
+                .forEach((channel) => {
+                    broadcastChannel(channel, 'quit', {
+                        channel,
+                        userId: user.id
+                    }, user.id)
+                })
+        }
         // Remove from users
         users.splice(users.indexOf(user), 1)
         // Remove from channels
@@ -34,9 +45,6 @@ io.on('connection', (socket) => {
             if (i !== -1) userIds.splice(i, 1)
         })
         deleteEmptyChannels()
-        if (user.nickname !== null) {
-            broadcastUserChannels(user.id, 'disconnect', user.id, user.id)
-        }
     })
 
     // Change Nickname
