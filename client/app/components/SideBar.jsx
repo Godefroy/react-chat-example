@@ -6,7 +6,7 @@ import ChannelsList from './ChannelsList'
 
 class SideBar extends React.Component {
     render() {
-        return <Paper style={{position: 'relative', height: '100%'}}>
+        return <Paper>
             <ChannelsList />
             <Divider />
             <UsersList />
