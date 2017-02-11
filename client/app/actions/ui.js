@@ -1,6 +1,7 @@
 // Actions types
 export const actions = {
     CHANGE_CHANNEL: 'CHANGE_CHANNEL',
+    UPDATE_NICKNAME_FORM: 'UPDATE_NICKNAME_FORM',
     UPDATE_MESSAGE_FORM: 'UPDATE_MESSAGE_FORM'
 }
 
@@ -11,9 +12,16 @@ export function changeChannel(channel) {
     }
 }
 
-export function updateForm(text) {
+export function updateMessageForm(inputMessage) {
     return {
         type: actions.UPDATE_MESSAGE_FORM,
-        text
+        inputMessage
+    }
+}
+
+export function updateNicknameForm(inputNickname) {
+    return {
+        type: actions.UPDATE_NICKNAME_FORM,
+        inputNickname
     }
 }

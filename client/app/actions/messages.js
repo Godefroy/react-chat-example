@@ -25,12 +25,7 @@ export function sendMessage(channel, text) {
         return changeNickname(match[1])
     }
     if (match = text.match(/^\/join #?([a-z0-9_-]{3,20})$/i)) {
-        return (dispatch) => {
-            joinChannel(match[1])((action) => {
-                dispatch(action)
-                dispatch(changeChannel(match[1]))
-            })
-        }
+        return joinChannel(match[1])
     }
     if (match = text.match(/^\/quit$/i)) {
         return quitChannel(channel)

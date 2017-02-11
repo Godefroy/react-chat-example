@@ -1,5 +1,7 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Grid, Row, Col} from 'react-bootstrap'
+import ConnectBox from './ConnectBox'
 import MessageForm from './MessageForm'
 import Messages from './Messages'
 import SideBar from './SideBar'
@@ -15,9 +17,12 @@ const styles = {
     }
 }
 
-export default class App extends React.Component {
+class App extends React.Component {
     render() {
-        return <div style={ styles.container }>
+        const {notifiers} = this.props
+        return !notifiers.connected
+            ? <ConnectBox />
+            : <div style={ styles.container }>
             <Menu />
             <Grid fluid>
                 <Row>
@@ -33,3 +38,15 @@ export default class App extends React.Component {
         </div>
     }
 }
+
+App.propTypes = {
+    notifiers: React.PropTypes.object
+}
+
+const mapStateToProps = (state) => ({
+    notifiers: {
+        connected: state.userReducer.get('id') !== null
+    }
+})
+
+export default connect(mapStateToProps)(App)
