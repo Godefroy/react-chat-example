@@ -14,7 +14,11 @@ const groupMaxTimelapse = 30
 
 const styles = {
     container: {
-        height: '400px',
+        position: 'fixed',
+        zIndex: -1,
+        top: 112,
+        bottom: 48,
+        width: '100%',
         overflowY: 'auto'
     }
 }

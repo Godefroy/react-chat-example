@@ -9,7 +9,11 @@ import {updateMessageForm} from '../actions/ui'
 class MessageForm extends React.Component {
     render() {
         const {notifiers, actions} = this.props
-        return <form onSubmit={ this.submit.bind(this) }>
+        return <form onSubmit={ this.submit.bind(this) } style={{
+            position: 'fixed',
+            bottom: 0,
+            width: '100%'
+        }}>
             <Paper style={{padding: '0 15px'}}>
                 <TextField
                     hintText='Message...'

@@ -7,22 +7,12 @@ import Messages from './Messages'
 import SideBar from './SideBar'
 import Menu from './Menu'
 
-const styles = {
-    container: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0
-    }
-}
-
 class App extends React.Component {
     render() {
         const {notifiers} = this.props
         return !notifiers.connected
             ? <ConnectBox />
-            : <div style={ styles.container }>
+            : <div>
             <Menu />
             <Grid fluid>
                 <Row>
