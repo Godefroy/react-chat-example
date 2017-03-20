@@ -22,6 +22,13 @@ export default createReducer(initialState, {
             return users.delete(i)
         })
     },
+    [actions.CHANNEL_USER_NICK]: (state, {user}) => {
+        return state.map((users) => {
+            const i = users.findIndex((u) => u.get('id') === user.id)
+            if (i === -1) return users
+            return users.set(i, Immutable.fromJS(user))
+        })
+    },
     [actions.CHANNEL_USER_DISCONNECT]: (state, {userId}) => {
         return state.map((users) => {
             const i = users.findIndex((u) => u.get('id') === userId)

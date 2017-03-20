@@ -7,6 +7,7 @@ export const actions = {
     CHANNEL_QUIT: 'CHANNEL_QUIT',
     CHANNEL_USER_JOIN: 'CHANNEL_USER_JOIN',
     CHANNEL_USER_QUIT: 'CHANNEL_USER_QUIT',
+    CHANNEL_USER_NICK: 'CHANNEL_USER_NICK',
     CHANNEL_USER_DISCONNECT: 'CHANNEL_USER_DISCONNECT'
 }
 
@@ -23,6 +24,12 @@ socket.on('quit', ({channel, userId}) => {
         type: actions.CHANNEL_USER_QUIT,
         channel,
         userId
+    })
+})
+socket.on('nick', (user) => {
+    store.dispatch( {
+        type: actions.CHANNEL_USER_NICK,
+        user
     })
 })
 socket.on('disconnect', (userId) => {
